@@ -1,0 +1,10 @@
+1- Install mongodb server and mongosh client
+Create database with name ITI  by typing use ITI
+start create new collection named instructors and start with following
+inserts
+	a- Insert many using array contained 
+	b- Insert your own data
+	c- Insert instructor without firstName and LastName (mongo will raise an
+error or not ?)
+show collections 
+show documents
