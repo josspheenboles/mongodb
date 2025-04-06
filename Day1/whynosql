@@ -1,0 +1,60 @@
+data categories
+	Structured
+		predefined schema
+		Tabular format with fixed columns
+		Strongly typed data elements
+		Relationships enforced through keys
+		Examples:Relational database tables (SQL),Spreadsheets,Financial transaction
+	Semi-Structured Data
+		Flexible schema
+		Self-describing (contains metadata/tags)
+		Hierarchical organization
+		Partial organization with some structure
+		Examples:
+			JSON/XML documents
+			NoSQL databases (MongoDB)
+			Email messages (structured headers + unstructured body)
+			Log files with some consistent fields
+	Unstructured Data
+		No predefined data model
+		No inherent organization
+		Typically text-heavy but can be binary
+		Difficult to analyze without processing
+
+		Examples:
+			Text documents (Word, PDF)
+
+			Multimedia files (images, videos)
+
+			Social media posts
+
+			Sensor data streams
+
+			Scientific datasets
+Modern Hybrid Approaches:
+	PostgreSQL with JSONB columns (SQL + document)
+
+	MongoDB with strict schema validation
+
+	Data lakes that store all types with metadata
+
+	Search engines (Elasticsearch) that index unstructured content
+====================================
+Big data
+	volume --->data volum big
+	velocity---> (instgram & facebook & iot devices)
+	varity---> (in relation db must alter table and allow null)
+	
+		
+why nosql
+	realational db in join with zeta size (data everywhere) very slow 
+	data store in hard disk but query processing in memery
+	so in zeta size (imagin memory size can handel join)
+	-no join
+	-no nulls
+	-no schema
+	-no relation
+	
+	
+	
+	

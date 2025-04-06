@@ -1,0 +1,29 @@
+====ubunut20.04
+wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+
+echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+
+sudo apt update
+
+sudo apt install -y mongodb-org
+
+sudo systemctl start mongod
+
+sudo systemctl status mongod
+
+===redhat 9
+
+wget https://repo.mongodb.org/yum/redhat/9/mongodb-org/7.0/x86_64/RPMS/mongodb-org-server-7.0.6-1.el9.x86_64.rpm
+wget https://repo.mongodb.org/yum/redhat/9/mongodb-org/7.0/x86_64/RPMS/mongodb-org-mongos-7.0.6-1.el9.x86_64.rpm
+wget https://repo.mongodb.org/yum/redhat/9/mongodb-org/7.0/x86_64/RPMS/mongodb-org-shell-7.0.6-1.el9.x86_64.rpm
+wget https://repo.mongodb.org/yum/redhat/9/mongodb-org/7.0/x86_64/RPMS/mongodb-org-tools-7.0.6-1.el9.x86_64.rpm
+
+
+sudo rpm -ivh mongodb-org-*.rpm
+
+sudo semanage port -a -t mongod_port_t -p tcp 27017
+
+sudo firewall-cmd --add-port=27017/tcp --permanent
+sudo firewall-cmd --reload
+
+

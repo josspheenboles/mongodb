@@ -1,0 +1,28 @@
+nosql catagory:
+	key-value store
+		like js object
+		key:value
+		value (int,string,..)
+		use in cahcing store data in memory only (redis)
+		redis(Remote Dictionary Server) 
+			is an open-source, 
+			in-memory data structure store)	
+		ex:Real-time processing (leaderboards, notifications)
+		
+		
+	document based store 
+		
+	
+	column based store
+		cassandra
+=====mongodb
+database---->database
+tables--->collection
+rows---->document
+columns--->fields
+
+---->json --->javascript object notation
+bison --->mongo store in disk as bision
+but i write json
+
+
