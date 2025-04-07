@@ -1,0 +1,39 @@
+===========Create Collection
+// Basic collection creation
+db.createCollection("users")
+
+// With options (capped collection example)
+db.createCollection("logs", {
+  capped: true,
+  size: 1000000,  // 1MB max size
+  max: 1000       // Max 1000 documents
+})
+
+==========Collection Management
+//show collections
+show collections
+or 
+db.getCollectionNames()
+
+//get info about collection
+db.getCollectionInfos({"name":"track"})
+//drop collection
+db.collctionname.drop()
+
+// Rename collection
+db.users.renameCollection("members")
+
+// Get collection stats
+db.users.stats()
+
+// Get storage size
+db.users.storageSize()
+
+// Count documents (fast estimate)
+db.users.estimatedDocumentCount()
+
+// Exact count with filters
+db.users.countDocuments({ status: "active" })
+
+// Remove all documents (keeps collection)
+db.users.deleteMany({})

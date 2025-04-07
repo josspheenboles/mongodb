@@ -1,0 +1,59 @@
+===========Insert 
+	ObjectId(_id):
+		default primary key for a MongoDB document
+		and is found in _id field in an inserted document
+		Immutable
+		Unique
+		BSON DataType
+		12 byte Value
+			 4-byte value representing the seconds since the Unix epoch.
+			 3-byte machine identifier(derived from mac).
+			 2-byte process id.
+			 3-byte counter, starting with a random value.
+	===========Insert Single Documents
+		db.users.insertOne({
+			  name: "Alice",
+			  age: 28,
+			  email: "alice@example.com",
+			  status: "active",
+			  join_date: new Date()
+		})
+	===========Insert Multiple Documents
+		db.products.insertMany(
+		[
+		  { _id: 101, name: "Laptop", price: 999, stock: 50 },
+		  { _id: 102, name: "Mouse", price: 25, stock: 200 }
+		]
+		)
+	===========Insert with Write Concern
+		It controls data durability and consistency by specifying how many nodes must confirm a write before it's considered successful.
+		1. Write Concern Levels
+				
+		db.logs.insertOne(
+		  { message: "System started", level: "info" },
+		  { writeConcern: { w: "majority", wtimeout: 5000 } }
+		)
+===========Update
+	===Update a Single Document
+	// Update first matching document
+		db.users.updateOne(
+		  { email: "alice@example.com" },  // Filter
+		  { $set: { status: "verified" } }  // Update
+		)
+	===Update a Multiple Document
+	// Update all matching documents
+	db.products.updateMany(
+	 	 { stock: { $lt: 10 } },          // Filter (low stock items)
+	 	 { $set: { needsRestock: true } }  // Update
+	)
+	===Replace Entire Document
+	// Replace the whole document (keep same _id)
+	db.customers.replaceOne(
+	  { _id: 101 },
+	  { 
+	    name: "Alice Smith", 
+	    email: "alice.smith@newdomain.com",
+	    membership: "gold" 	
+	}//new document
+	)		
+ 	

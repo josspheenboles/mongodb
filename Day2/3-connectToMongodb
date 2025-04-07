@@ -1,0 +1,11 @@
+# Connect to local MongoDB instance
+mongosh
+
+# Connect with authentication
+mongosh -u "username" -p "password" --authenticationDatabase "admin"
+
+# Connect to remote server
+mongosh "mongodb://hostname:27017"
+
+============================================
+

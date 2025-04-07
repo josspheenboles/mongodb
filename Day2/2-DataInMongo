@@ -1,0 +1,42 @@
+============ubuntu================
+MongoDB stores its data in the /var/lib/mongodb directory by default
+Configuration file: 
+	/etc/mongod.conf
+	Contains MongoDB settings, including dbPath, logPath, and port.
+Log Files:
+	/var/log/mongodb/mongod.log
+to Check MongoDB Data Location
+	/etc/mongod.conf
+	Or
+	db.serverCmdLineOpts()
+	
+
+============Redhat================
+MongoDB stores its data in the /var/lib/mongo directory by default
+============windows==============
+MongoDB stores its data in the C:\data\db\ directory by default
+Configuration file: 
+	C:\Program Files\MongoDB\Server\<version>\bin\mongod.cfg
+	Contains MongoDB settings, including dbPath, logPath, and port.
+Log Files:
+	C:\Program Files\MongoDB\Server\<version>\log\mongod.log
+
+
+============Databases==============
+Never delete these system databases 
+system databases :
+	admin--->0.000GB
+		Authentication and authorization database
+		Stores user roles and privileges
+		Critical for admin operations like shutdown or replSetInitiate(The command requires superuser privileges)
+
+	config--->0.000GB
+		Used for sharding configurations
+		Contains metadata about sharded collections
+		Empty in standalone deployments
+local--->0.000GB
+	Stores data specific to a single server
+	Contains:
+		Replication data (if using replica sets)
+		Startup logs
+		Server-specific collections

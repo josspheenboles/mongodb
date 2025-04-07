@@ -54,6 +54,36 @@ why nosql
 	-no nulls
 	-no schema
 	-no relation
+================high availability
+MongoDB ensures high availability (HA) using replica sets, a self-healing cluster of MongoDB servers that maintain multiple copies of data
+
+replica set is a group of MongoDB servers 
+	Maintain identical copies of the same data (data redundancy)
+	Automatically fail over if the primary server fails
+	Support read scaling (distribute read operations to secondaries)
+Replica Set Members:
+	Primary:
+		Handles all write operations and replicates changes to secondaries
+	Secondaries:
+		Replicates data from the primary (can serve reads)
+	Arbiter:
+		Votes in elections (no data storage)
+Automatic Failover:
+	If the primary crashes, remaining members elect a new primary.
+
+Data Synchronization
+	Oplog (Operations Log): The primary records all write operations in its oplog.
+	Secondaries continuously replay the oplog to stay in sync.
+
+
+	
+================Horizontal Scaling
+distributes data across multiple servers to handle large datasets and high throughput
+What is Sharding???
+	Splits a collection into smaller chunks (ranges of data)
+	Distributes chunks across shards (individual MongoDB servers/replica sets)
+	Managed by query routers (mongos) and config servers
+	
 	
 	
 	

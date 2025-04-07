@@ -1,0 +1,36 @@
+===========Database Operations (MongoDB Shell)
+// Show all databases
+show dbs
+Or 
+show databases
+// Create/switch to database (created when first document is inserted)
+use myDatabase
+
+// Check current database (pointer)
+db
+
+// Delete current database
+db.dropDatabase()
+========Creating a Database
+// Switch to a database (creates it if it doesn't exist)
+//Actually Creating the Database (by inserting data)
+use myNewDatabase
+// Check current database (db pointer to current database)
+db
+
+// List all databases (only shows databases with content)
+show dbs
+==========Database Stats
+// Get database statistics
+db.stats()
+
+// Get storage size info
+db.storageSize()
+
+==========Dropping a Database
+// First switch to the database
+use databaseToDelete
+
+// Then drop it
+db.dropDatabase()
+

@@ -1,0 +1,60 @@
+===========Read
+	find() - Retrieves documents 
+		db.collection.find()
+	find() - Retrieves documents that match specified criteria
+		db.collection.find({ field: value })
+	findOne() - Retrieves a single document that matches specified criteria
+		db.collection.findOne({ field: value })
+	==result as readable json objects
+		db.collection.find().pretty()
+	===Projection - Specify which fields to return
+		db.collection.find(
+			{ field: value } //criteria,
+			{ field1: 1, field2: 1 } //fileds returns
+			)
+	==Sort - Sort the results
+		== 1 for ascending
+		==-1 for descending
+		db.collection.find().sort(
+		{ field: 1 }
+		) 
+	==Limit - Limit the number of results
+		db.collection.find().limit(10)
+	==Skip - Skip a number of documents
+		db.collection.find().skip(20)
+=====Operators
+	==Comparisons
+		$eq ===>equal to a specified value.
+		$gt ===>greater than 
+		$gte===>greater than or equal to 
+		$in===> Matches any of the values specified in an array.
+		$lt===>less than
+		$lte===> less than or equal to
+		$ne===>  not equal to
+		$nin===> Matches none of the values specified in an array.
+
+		db.collection.find({ field: {$lt:value} })
+	==logical
+		$and 
+		$not 
+		$nor===>NOR returns all documents that fail to match both clauses. 
+		$odb.collection.find(
+		{ 
+		$and: 
+			[
+			{field1:val1},
+			{field2:val2},
+			]
+		})
+	==Array
+		$all ==>Matches arrays that contain all elements specified in the query.
+			db.trainee.find(
+			{"trackid":{$all:[1,2]}
+			)
+		$elemMatch ===>Selects documents if element in the array field matches 			all the	specified $elemMatchconditions.
+		$size===> Selects documents if the array field is a specified size.
+	==element
+		$exists===>documents that have the specified field.
+		$type =====>Selects documents if a field is of the specified type.
+	==Update
+			
