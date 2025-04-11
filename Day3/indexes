@@ -1,0 +1,39 @@
+Types of Indexes:
+	==Single Field Index:Indexes on a single field
+		db.collection.createIndex({ fieldName: 1 }) // 1 for ascending, -1 for descending
+	==Compound Index:Index on multiple fields
+		db.collection.createIndex({ field1: 1, field2: -1 })
+	==Multikey Index:Index on array fields (created automatically when indexing arrays)
+		db.collection.createIndex({ arrayField: 1 })
+Index Properties:
+	Unique:
+		db.collection.createIndex({ email: 1 }, { unique: true })
+	Partial:
+		db.collection.createIndex(
+		  { name: 1 },
+		  { partialFilterExpression: { rating: { $gt: 5 } } }
+		)
+	TTL Index (Time-To-Live):
+		db.logs.createIndex({ createdAt: 1 }, { expireAfterSeconds: 3600 })
+Index Management:
+	==List
+		db.collection.getIndexes()
+	==Drop
+		db.collection.dropIndex("indexName")
+	==Drop all indexes (except _id):
+		db.collection.dropIndexes()
+Best Practices
+	Create indexes that support your common queries
+
+	Use compound indexes strategically (ESR rule: Equality, Sort, Range)
+
+	Consider index selectivity (more unique values = better performance)
+
+	Be mindful of write performance (each index adds overhead)
+
+	Monitor index usage and remove unused indexes
+
+	For large collections, build indexes in the background:
+		
+		db.collection.createIndex({ field: 1 }, { background: true })
+

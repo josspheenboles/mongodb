@@ -1,0 +1,84 @@
+===relations
+that handles relationships differently than relational databases. Here are the main approaches to modeling relationships in MongoDB:
+	==Embedded Documents (Denormalization)
+		//Best for: One-to-one or one-to-few relationships where related data is frequently accessed together.
+		// User with embedded
+		{
+		  _id: "user123",
+		  name: "John Doe",
+		  address: {
+		    street: "123 Main St",
+		    city: "New York",
+		    state: "NY",
+		    zip: "10001"
+		  }
+		}
+		
+		Advantages:
+			Single read operation retrieves all related data
+			Atomic updates within a single document
+			Better performance for read-heavy operations
+		Disadvantages:
+			Documents can grow large
+			No easy way to query embedded documents across parent documents
+
+	==Document References (Normalization)
+		//Best for:One-to-many/many-to-many. where related data might grow large.
+		// Users collection
+			{
+			  _id: "user123",
+			  name: "John Doe"
+
+			}
+
+		// Posts collection
+		{
+		  _id: "post456",
+		  title: "My First Post",
+		  author: "user123"  // Reference to user
+		}
+
+		Advantages:
+			Documents stay small
+			Relationships can grow without document size limits
+			More flexible querying
+		Disadvantages:
+			Requires multiple queries to retrieve related data
+			No referential integrity (unless using DBRefs)		
+	==DBRefs (Database References)
+		//Standardized format for document references that includes collection name:
+		
+		//document of post
+		{
+		  _id: "post456",
+		  title: "My First Post",
+		  author: {
+		    "$ref": "users",//collection name 
+		    "$id": "user123",
+		    "$db": "blogdb"  // Optional for cross-database references
+		  }
+		}
+		
+		
+===query examples
+	==Embedded Document Queries
+		==Find documents with matching embedded fields
+			// Find users living in New York
+			db.users.find({
+			  "address.city": "New York"
+			})		
+	==Reference-Based Relationship Queries
+	
+		==Basic reference query (two-step)
+			// 1. Get author ID from post
+			const post = db.posts.findOne({ _id: "post456" });
+
+			// 2. Get author details
+			const author = db.users.findOne({ _id: post.author });
+		==Many-to-many query
+			// Find all books by an author (books have author references)
+			db.books.find({ authors: "author456" })
+
+			// Find all authors of a book (authors have book references)
+			db.authors.find({ books: "book123" })
+

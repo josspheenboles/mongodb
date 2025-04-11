@@ -1,0 +1,58 @@
+---uppdate
+--$set :update exsist field or add not exsist field
+==Partial (only specified fields)
+==Keeps existing fields
+==Never changes _id//
+==Generally faster for small changes
+
+====updateOne() - Updates a single document that matches the filter
+	db.collection.updateOne(
+	   <filter>,
+	   <update>,
+	   {
+	     upsert: <boolean>,
+	     writeConcern: <document>,
+	     collation: <document>,
+	     arrayFilters: [ <filterdocument1>, ... ]
+	   }
+	)
+====updateMany() - Updates all documents that match the filter
+db.collection.updateMany(
+   <filter>,
+   <update>,
+   {
+     upsert: <boolean>,
+     writeConcern: <document>,
+     collation: <document>,
+     arrayFilters: [ <filterdocument1>, ... ]
+   }
+)
+====replaceOne() - Replaces a single document that matches the filter
+	==Preserves _id but replaces everything else
+	==Removes unspecified fields
+	==Complete (whole document)
+db.collection.replaceOne(
+   <filter>,
+   <replacement>,
+   {
+     upsert: <boolean>,
+     writeConcern: <document>,
+     collation: <document>
+   }
+)
+====Update Operators
+	==$set - Sets the value of a field
+	==$unset - Removes a field
+	==$inc - Increments a field's value
+	==$mul - Multiplies a field's value
+==Array Update Operators
+	==$push - Adds an item to an array(allow duplication)
+	==$addToSet - Adds an item to an array if not already present (not allow duplication)
+	==$pop - Removes the first or last item from an array
+	==$pull - Removes all instances of a value from an array javascript
+	==$pullAll - Removes all instances of several values from an array
+===Update Options
+	==upsert - If true, creates a new document when no document matches the filter
+	==arrayFilters - Used to update specific elements in an array
+	
+

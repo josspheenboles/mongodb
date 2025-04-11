@@ -1,0 +1,77 @@
+==Pipeline Stages
+	$match - Filters documents (similar to find())
+	$project - Reshapes documents (selects fields)
+
+	$group - Groups documents by specified identifier
+
+	$sort - Sorts documents
+
+	$skip - Skips a number of documents
+
+	$limit - Limits the number of documents
+
+	$unwind - Deconstructs an array field
+
+	$lookup - Performs a left outer join
+
+	$facet - Processes multiple pipelines in a single stage
+
+	$bucket - Categorizes documents into groups
+
+	$count - Counts documents
+
+	$merge - Writes results to a collection (MongoDB 4.2+)
+
+	$out - Writes results to a collection (replaces if exists)
+==Accumulators (used in $group)
+	$sum - Calculates the sum
+
+	$avg - Calculates the average
+
+	$first - Returns the first value in a group
+
+	$last - Returns the last value in a group
+
+	$max - Returns the highest value
+
+	$min - Returns the lowest value
+
+	$push - Creates an array of values
+
+	$addToSet - Creates an array of unique values
+	
+==Expression Operators
+Arithmetic Operators
+add∗∗,∗∗subtract, 
+multiply∗∗,∗∗divide, $mod
+Date Operators
+	dateToString∗∗,∗∗dayOfMonth, 
+	dayOfWeek∗∗,∗∗hour, 
+	month∗∗,∗∗year
+String Operators
+	concat∗∗,∗∗substr, 
+	toLower∗∗,∗∗toUpper, $trim
+Comparison Operators
+	eq∗∗,∗∗gt, 
+	gte∗∗,∗∗lt, 
+	lte∗∗,∗∗ne
+Array Operators
+	arrayElemAt∗∗,∗∗concatArrays, 
+	filter∗∗,∗∗size
+Conditional Operators
+	cond∗∗,∗∗ifNull, $switch
+
+example:
+	db.orders.aggregate([
+	  { $match: { status: "completed", date: { $gte: ISODate("2023-01-01") } } },
+	  { $unwind: "$items" },
+	  { $group: {
+	      _id: "$customerId",
+	      totalSpent: { $sum: { $multiply: ["$items.price", "$items.quantity"] } },
+	      averageOrder: { $avg: "$items.price" },
+	      orderCount: { $sum: 1 }
+	    }
+	  },
+	  { $sort: { totalSpent: -1 } },
+	  { $limit: 10 }
+	])

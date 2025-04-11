@@ -1,0 +1,29 @@
+===delete
+	==deleteOne() :Deletes a single document that matches the specified filter.
+		db.collection.deleteOne(
+		   <filter>,
+		   {
+		      writeConcern: <document>,
+		      collation: <document>
+		   }
+		)
+	==deleteMany:Deletes all documents that match the specified filter.
+		db.collection.deleteMany(
+		   <filter>,
+		   {
+		      writeConcern: <document>,
+		      collation: <document>
+		   }
+		)
+	==remove():deprecated but still works. It can delete one or many documents.
+		// Delete one document (equivalent to deleteOne)
+		db.users.remove({ status: "inactive" }, { justOne: true })
+
+		// Delete multiple documents (equivalent to deleteMany)
+		db.users.remove({ status: "temporary" })
+	==Deleting All Documents
+		db.collection.deleteMany({}) // Empty filter matches all documents
+		//To completely remove a collection (including all documents and
+		 indexes):
+		 db.collection.drop()
+		

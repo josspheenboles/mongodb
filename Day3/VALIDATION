@@ -1,0 +1,65 @@
+==Validation Levels
+	==Strict Validation (default)
+	==Moderate Validation:Validates only existing valid documents
+==Validation Actions
+	==Error:Rejects invalid operations
+	==Warn:Logs warnings but allows invalid operations
+==Setting Up Validation
+	==During Collection Creation
+		==db.createCollection("COLLECTIONAME",{
+		validator:{},
+		validationAction:"",
+		validationLevel:""
+		}) 
+				db.createCollection("employees", 
+				{
+			  validator: {
+			    $jsonSchema: {
+			      bsonType: "object",
+			      required: ["name", "email", "department"],
+			      properties: {
+				name: {
+				  bsonType: "string",
+				  description: "must be a string and is required"
+				},
+				email: {
+				  bsonType: "string",
+				  pattern: "^.+@.+\..+$",
+				  description: "must be a valid email and is required"
+				},
+				age: {
+				  bsonType: "int",
+				  minimum: 18,
+				  maximum: 65,
+				  description: "must be an integer between 18 and 65"
+				},
+				department: {
+				  enum: ["HR", "Engineering", "Marketing", "Finance"],
+				  description: "must be one of the listed departments"
+				}
+			      }
+			    }
+			  },
+			  validationAction: "error",
+			  validationLevel: "strict"
+			})
+				
+	==Adding Validation to Existing Collection
+		/*db.runCommand({
+		collMod:"COLLECTIONAME",
+		validator:{},
+		validationLevel:"",
+		validationAction:""
+		})*/
+		
+		db.runCommand({
+		  collMod: "employees",
+		  validator: {
+		    $jsonSchema: {
+		      // schema definition
+		    }
+		  },
+		  validationLevel: "moderate",
+		  validationAction: "warn"
+		})
+
