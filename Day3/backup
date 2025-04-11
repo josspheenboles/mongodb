@@ -1,0 +1,16 @@
+==Using mongodump
+	==backup 
+		mongodump --host <hostname> --port <port> -u <username> -p <password> --authenticationDatabase admin --db <database_name> --out /path/to/backup/directory
+	==restore
+		mongorestore --host <hostname> --port <port> -u <username> -p <password> --authenticationDatabase admin --db <target_db_name> /path/to/backup/directory
+==Best Practices
+	Schedule regular backups
+
+	Test restore procedures
+
+	Store backups in a different location
+
+	Consider backup retention policies
+
+	For large databases, consider incremental backups
+	

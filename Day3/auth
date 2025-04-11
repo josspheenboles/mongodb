@@ -1,0 +1,22 @@
+==Creating Users
+	use admin
+	db.createUser({
+	  user: "admin",
+	  pwd: "securePassword123",
+	  roles: ["root"]
+	})
+==Authorization Configuration
+	Enable authentication in mongod.conf:
+		security:
+		  authorization: enabled
+	sudo systemctl restart mongod
+==List all users:
+	db.getUsers()
+==Update user password:	
+	db.updateUser("username", { pwd: "newPassword" })
+==Grant additional roles:
+	db.grantRolesToUser("username", ["readWrite", "dbAdmin"])
+==Revoke roles:
+	db.revokeRolesFromUser("username", ["dbAdmin"])
+==Delete user:
+	db.dropUser("username")
